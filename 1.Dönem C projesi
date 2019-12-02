@@ -1,0 +1,127 @@
+#include<stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <time.h>
+#include <stdbool.h>
+
+int DepoIlac(int n){
+	FILE *outfile,*infile;
+	char ch,ch1;
+	char IlacAdi[20],FirmaAdi[20];
+	int adet=0;
+	outfile=fopen("abc.txt","r");
+	
+	while(!feof(outfile)){
+		ch=getc(outfile);
+		printf("%c",ch);
+	}
+	fclose(outfile);
+	if(n==1){
+		printf("\n-------------\n"
+		"Ilac Adi giriniz:");
+		scanf("%s",IlacAdi);
+		//gets(IlacAdi);
+		printf("Firma Adini giriniz:");
+		scanf("%s",FirmaAdi);
+		printf("Adet sayisini giriniz:");
+		scanf("%d",&adet);
+		infile=fopen("abc.txt","a");	
+	
+		fprintf(outfile,"%s-----%s-----%d\n",IlacAdi,FirmaAdi,adet);	
+		fclose(infile);
+	}
+	
+
+}
+void PersonelListe(){
+	char* personelListe[3]={"Ozan Yilmaz","Furkan Cesur","Cem Ulun"};
+	
+	for(int i=0; i<3; i++ ){
+		printf("%s\n",personelListe[i]);
+	}	
+}
+
+void KisiList(){
+	
+	int tcNo[10]={
+	57854123,85247963,
+	35789621,65478932,
+	48154891,89451232,
+	48621321,23215468,
+	32154987,12345678};
+	
+	char *Kisiler[10][2]={
+	{"Cem Candan","18"},
+	{"Batuhan Ulun","19"},
+	{"Furkan Kaan Akyuz","24"},
+	{"Turgay Kurt","23"},
+	{"Orcun Holta","23"},
+	{"Cem Eroksuz","25"},
+	{"Mehmet Eryilmaz","24"},
+	{"Furkan Aydin","22"},
+	{"Elif Sahin","24"},
+	{"Elif Sahinkaya","25"}
+	};
+	
+	for(int i=0; i<10; i++){
+		for(int j=0; j<1; j++){
+			printf("\tAd ve Soyad=%s | Yas=%s | TcNo=%d\n",Kisiler[i][j],Kisiler[i][j+1],tcNo[i]);
+		}
+	}
+}
+
+void yuklemeEkrani(){
+		char *yuklemeEkrani[3]={"Veri Tabani yukleniyor","Sistem Guncelleniyor","Bilgiler Aliniyor"};
+		printf("----Ak Eczanesine Hosgeldiniz----\n"
+		"Sistem Yukleniyor.\nLutfen Bekleyiniz.\n");
+		//sleep(2); // bilerek yavaşlatma
+		int sayac=0;
+		for(int i=0; i<3; i++){
+			printf("%s",yuklemeEkrani[i]);
+			while(sayac<=3){
+				printf("%c",46); // ascii tablosu  . (Nokta) simgesi
+				//sleep(1);
+				sayac++;
+			}
+			printf("\n");
+			sayac=0;
+			//sleep(1);
+		}
+}
+int main(void) {
+	
+	bool cikis=true;
+	yuklemeEkrani();  // fonksiyon çağırma
+	do{
+		printf("\nYapmak istediklerinizi asagidaki listeden seciniz lutfen:\n"
+		"1)Depodaki ilac listesini getir.\n"
+		"2)Eczaneye kayitli hastalari getir.\n"
+		"3)Personel Listesini getir.\n"
+		"4)Depoya ilac ekle.\n"
+		"5)Eczaneye hasta ekle.\n"
+		"6)Cikis.\n");
+	int liste;
+	
+	scanf("%d",&liste);
+	switch(liste){
+		case 1:
+			DepoIlac(0);
+			break;
+		case 2:
+			KisiList();
+			break;
+		case 3:
+			PersonelListe();
+			break;
+		case 4:
+			DepoIlac(1);
+			break;
+		case 5:
+			//HastaEkle();
+			break;
+		case 6:
+			cikis=false;
+	}
+	}while(cikis);
+	return 0;
+}
